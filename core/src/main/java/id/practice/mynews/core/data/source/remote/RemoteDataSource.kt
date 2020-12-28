@@ -3,6 +3,7 @@ package id.practice.mynews.core.data.source.remote
 import android.util.Log
 import id.practice.mynews.core.data.source.remote.network.ApiResponse
 import id.practice.mynews.core.data.source.remote.network.ApiService
+import id.practice.mynews.core.data.source.remote.response.ArticleResponse
 import id.practice.mynews.core.data.source.remote.response.MessageResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -18,6 +19,23 @@ class RemoteDataSource(private val apiService: ApiService) {
                 val dataArray = response.result
                 if (dataArray.isNotEmpty()){
                     emit(ApiResponse.Success(response.result))
+                } else {
+                    emit(ApiResponse.Empty)
+                }
+            } catch (e : Exception){
+                emit(ApiResponse.Error(e.toString()))
+                Log.e("RemoteDataSource", e.toString())
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getTopHeadlines(): Flow<ApiResponse<List<ArticleResponse>>> {
+        return flow {
+            try {
+                val response = apiService.getTopHeadlines()
+                val dataArray = response.articles
+                if (dataArray.isNotEmpty()){
+                    emit(ApiResponse.Success(response.articles))
                 } else {
                     emit(ApiResponse.Empty)
                 }
