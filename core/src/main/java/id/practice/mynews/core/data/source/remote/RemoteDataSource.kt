@@ -29,7 +29,7 @@ class RemoteDataSource(private val apiService: ApiService) {
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun getTopHeadlines(): Flow<ApiResponse<List<ArticleResponse>>> {
+    suspend fun getArticles(): Flow<ApiResponse<List<ArticleResponse>>> {
         return flow {
             try {
                 val response = apiService.getTopHeadlines()

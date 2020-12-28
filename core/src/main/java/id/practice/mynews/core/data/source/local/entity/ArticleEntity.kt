@@ -10,7 +10,7 @@ data class ArticleEntity (
     @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name = "article_id")
-    var articleId: String,
+    var articleId: Int = 0,
 
     @ColumnInfo(name = "author")
     val author: String,

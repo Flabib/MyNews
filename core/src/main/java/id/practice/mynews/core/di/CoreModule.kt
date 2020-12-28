@@ -4,6 +4,7 @@ import androidx.room.Room
 import id.practice.mynews.core.BuildConfig
 import id.practice.mynews.core.data.MessageRepository
 import id.practice.mynews.core.data.source.local.LocalDataSource
+import id.practice.mynews.core.data.source.local.room.ArticleDatabase
 import id.practice.mynews.core.data.source.local.room.MessageDatabase
 import id.practice.mynews.core.data.source.remote.RemoteDataSource
 import id.practice.mynews.core.data.source.remote.network.ApiService
@@ -19,10 +20,17 @@ import java.util.concurrent.TimeUnit
 
 val databaseModule = module {
     factory { get<MessageDatabase>().messageDao() }
+    factory { get<ArticleDatabase>().articleDao() }
     single {
         Room.databaseBuilder(
             androidContext(),
             MessageDatabase::class.java, "Message.db"
+        ).fallbackToDestructiveMigration().build()
+    }
+    single {
+        Room.databaseBuilder(
+                androidContext(),
+                ArticleDatabase::class.java, "Articles.db"
         ).fallbackToDestructiveMigration().build()
     }
 }
@@ -46,7 +54,7 @@ val networkModule = module {
 }
 
 val repositoryModule = module {
-    single { LocalDataSource(get()) }
+    single { LocalDataSource(get(), get()) }
     single { RemoteDataSource(get()) }
     factory { AppExecutors() }
     single<IMessageRepository> {
