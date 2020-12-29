@@ -4,11 +4,8 @@ import id.practice.mynews.core.data.source.local.LocalDataSource
 import id.practice.mynews.core.data.source.remote.RemoteDataSource
 import id.practice.mynews.core.data.source.remote.network.ApiResponse
 import id.practice.mynews.core.data.source.remote.response.ArticleResponse
-import id.practice.mynews.core.data.source.remote.response.MessageResponse
 import id.practice.mynews.core.domain.model.Article
-import id.practice.mynews.core.domain.model.Message
 import id.practice.mynews.core.domain.repository.IArticleRepository
-import id.practice.mynews.core.domain.repository.IMessageRepository
 import id.practice.mynews.core.utils.AppExecutors
 import id.practice.mynews.core.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
@@ -28,8 +25,8 @@ class ArticleRepository(
                 }
             }
 
-            override fun shouldFetch(data: List<Article>?): Boolean =
-                data == null || data.isEmpty()
+            override fun shouldFetch(data: List<Article>?): Boolean = true
+//                data == null || data.isEmpty()
 
             override suspend fun createCall(): Flow<ApiResponse<List<ArticleResponse>>> =
                 remoteDataSource.getArticles()

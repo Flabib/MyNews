@@ -13,26 +13,26 @@ data class ArticleEntity (
     var articleId: Int = 0,
 
     @ColumnInfo(name = "author")
-    val author: String,
+    val author: String? = "",
 
     @ColumnInfo(name = "content")
-    val content: String,
+    val content: String? = "",
 
     @ColumnInfo(name = "description")
-    val description: String,
+    val description: String? = "",
 
     @ColumnInfo(name = "published_at")
-    val publishedAt: String,
+    val publishedAt: String? = "",
 
     @ColumnInfo(name = "source_name")
-    val sourceName: String,
+    val sourceName: String? = "",
 
     @ColumnInfo(name = "title")
-    val title: String,
+    val title: String? = "",
 
     @ColumnInfo(name = "url")
-    val url: String,
+    val url: String? = "",
 
     @ColumnInfo(name = "url_to_image")
-    val urlToImage: String
+    val urlToImage: String? = ""
 )

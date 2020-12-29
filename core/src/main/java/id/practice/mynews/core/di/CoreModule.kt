@@ -2,12 +2,14 @@ package id.practice.mynews.core.di
 
 import androidx.room.Room
 import id.practice.mynews.core.BuildConfig
+import id.practice.mynews.core.data.ArticleRepository
 import id.practice.mynews.core.data.MessageRepository
 import id.practice.mynews.core.data.source.local.LocalDataSource
 import id.practice.mynews.core.data.source.local.room.ArticleDatabase
 import id.practice.mynews.core.data.source.local.room.MessageDatabase
 import id.practice.mynews.core.data.source.remote.RemoteDataSource
 import id.practice.mynews.core.data.source.remote.network.ApiService
+import id.practice.mynews.core.domain.repository.IArticleRepository
 import id.practice.mynews.core.domain.repository.IMessageRepository
 import id.practice.mynews.core.utils.AppExecutors
 import okhttp3.OkHttpClient
@@ -62,6 +64,13 @@ val repositoryModule = module {
             get(),
             get(),
             get()
+        )
+    }
+    single<IArticleRepository> {
+        ArticleRepository(
+                get(),
+                get(),
+                get()
         )
     }
 }

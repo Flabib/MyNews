@@ -4,9 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallRequest
 import id.practice.mynews.core.data.Resource
+import id.practice.mynews.core.ui.ArticleAdapter
 import id.practice.mynews.databinding.ActivityMainBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -20,23 +23,34 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.message.observe(this, {
+        val articleAdapter = ArticleAdapter()
+
+        with (binding.rv) {
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+            adapter = articleAdapter
+            itemAnimator = DefaultItemAnimator()
+        }
+
+        viewModel.articles.observe(this, {
             if (it != null) {
                 when (it) {
-                    is Resource.Loading -> binding.tvWelcome.text = "Loading"
-                    is Resource.Success -> binding.tvWelcome.text = it.data?.get(0)?.welcomeMessage
-                    is Resource.Error -> binding.tvWelcome.text = "Error"
+                    is Resource.Loading -> return@observe
+                    is Resource.Success -> {
+                        articleAdapter.setData(it.data)
+                    }
+                    is Resource.Error -> return@observe
                 }
             }
         })
 
-        binding.btnExtra.setOnClickListener {
-            try {
-                installExtraModule()
-            } catch (e: Exception){
-                Toast.makeText(this, "Module not found", Toast.LENGTH_SHORT).show()
-            }
-        }
+//        binding.btnExtra.setOnClickListener {
+//            try {
+//                installExtraModule()
+//            } catch (e: Exception){
+//                Toast.makeText(this, "Module not found", Toast.LENGTH_SHORT).show()
+//            }
+//        }
     }
 
     private fun installExtraModule() {
