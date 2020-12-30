@@ -33,6 +33,8 @@ class ArticleRepository(
 
             override suspend fun saveCallResult(data: List<ArticleResponse>) {
                 val articleList = DataMapper.mapResponsesToEntities(data)
+
+                localDataSource.clearAll()
                 localDataSource.insertArticles(articleList)
             }
         }.asFlow()

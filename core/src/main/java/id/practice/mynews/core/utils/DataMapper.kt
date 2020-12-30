@@ -1,25 +1,10 @@
 package id.practice.mynews.core.utils
 
 import id.practice.mynews.core.data.source.local.entity.ArticleEntity
-import id.practice.mynews.core.data.source.local.entity.MessageEntity
 import id.practice.mynews.core.data.source.remote.response.ArticleResponse
-import id.practice.mynews.core.data.source.remote.response.MessageResponse
 import id.practice.mynews.core.domain.model.Article
-import id.practice.mynews.core.domain.model.Message
 
 object DataMapper {
-    @JvmName("mapResponsesToEntitiesMessage")
-    fun mapResponsesToEntities(input: List<MessageResponse>): List<MessageEntity> {
-        val messageList = ArrayList<MessageEntity>()
-        input.map {
-            val message = MessageEntity(
-                messageId = it.messageId,
-                welcomeMessage = it.welcomeMessage,
-            )
-            messageList.add(message)
-        }
-        return messageList
-    }
 
     @JvmName("mapResponsesToEntitiesArticle")
     fun mapResponsesToEntities(input: List<ArticleResponse>): List<ArticleEntity> {
@@ -40,15 +25,6 @@ object DataMapper {
         return articleList
     }
 
-    @JvmName("mapEntitiesToDomainMessage")
-    fun mapEntitiesToDomain(input: List<MessageEntity>): List<Message> =
-        input.map {
-            Message(
-                messageId = it.messageId,
-                welcomeMessage = it.welcomeMessage,
-            )
-        }
-
     @JvmName("mapEntitiesToDomainArticle")
     fun mapEntitiesToDomain(input: List<ArticleEntity>): List<Article> =
             input.map {
@@ -65,8 +41,15 @@ object DataMapper {
                 )
             }
 
-    fun mapDomainToEntity(input: Message) = MessageEntity(
-        messageId = input.messageId,
-        welcomeMessage = input.welcomeMessage,
+    fun mapDomainToEntity(input: Article) = ArticleEntity(
+        input.articleId,
+        input.author,
+        input.content,
+        input.description,
+        input.publishedAt,
+        input.sourceName,
+        input.title,
+        input.url,
+        input.urlToImage
     )
 }

@@ -1,13 +1,15 @@
-package id.practice.mynews.presentation
+package id.practice.mynews.presentation.main
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallRequest
+import id.practice.mynews.R
 import id.practice.mynews.core.data.Resource
 import id.practice.mynews.core.ui.ArticleAdapter
 import id.practice.mynews.databinding.ActivityMainBinding
@@ -24,8 +26,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val articleAdapter = ArticleAdapter()
+        articleAdapter.onItemClick = {
+            Toast.makeText(this, it.title, Toast.LENGTH_SHORT).show()
+        }
 
-        with (binding.rv) {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+
+        with(binding.recyclerView) {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             adapter = articleAdapter
@@ -35,11 +44,37 @@ class MainActivity : AppCompatActivity() {
         viewModel.articles.observe(this, {
             if (it != null) {
                 when (it) {
-                    is Resource.Loading -> return@observe
+                    is Resource.Loading -> {
+                        binding.swipeRefreshLayout.isRefreshing = true
+                        binding.componentError.root.visibility = View.GONE
+                    }
                     is Resource.Success -> {
                         articleAdapter.setData(it.data)
+                        binding.swipeRefreshLayout.isRefreshing = false
+                        binding.topHeadlines.visibility = View.VISIBLE
+
+                        if (it.data == null) {
+                            showErrorMessage(R.drawable.oops, "Oops..",
+                                """
+                                Network failure, Please Try Again!
+                                
+                                ${it.message}
+                                """.trimIndent()
+                            )
+                        }
                     }
-                    is Resource.Error -> return@observe
+                    is Resource.Error -> {
+                        binding.topHeadlines.visibility = View.INVISIBLE
+                        binding.swipeRefreshLayout.isRefreshing = false
+                        showErrorMessage(
+                            R.drawable.no_result, "No Result",
+                            """
+                            Please Try Again!
+                            
+                            ${it.message}
+                            """.trimIndent()
+                        )
+                    }
                 }
             }
         })
@@ -51,6 +86,17 @@ class MainActivity : AppCompatActivity() {
 //                Toast.makeText(this, "Module not found", Toast.LENGTH_SHORT).show()
 //            }
 //        }
+    }
+
+    private fun showErrorMessage(imageView: Int, title: String, message: String) {
+        if (binding.componentError.root.visibility == View.GONE) {
+            binding.componentError.root.visibility = View.VISIBLE
+        }
+
+        binding.componentError.errorImage.setImageResource(imageView)
+        binding.componentError.errorTitle.text = title
+        binding.componentError.errorMessage.text = message
+        binding.componentError.btnRetry.setOnClickListener { }
     }
 
     private fun installExtraModule() {

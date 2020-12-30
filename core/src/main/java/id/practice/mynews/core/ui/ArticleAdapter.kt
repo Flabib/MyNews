@@ -87,10 +87,7 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ListViewHolder>() {
                     .into(img)
 
                 title.text = data.title
-                desc.text = data.description
-                source.text = data.sourceName
-                time.text = " \u2022 " + data.publishedAt?.let { Tools.dateToTimeFormat(it) }
-                publishedAt.text = data.publishedAt?.let { Tools.dateFormat(it) }
+                time.text = data.publishedAt?.let { Tools.dateToTimeFormat(it) }
                 author.text = data.author
             }
         }

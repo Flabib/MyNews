@@ -55,7 +55,7 @@ class Tools {
             return newDate
         }
 
-        private val country: String
+        val country: String
             get() {
                 val locale = Locale.getDefault()
                 val country = locale.country.toString()
