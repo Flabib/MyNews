@@ -1,32 +1,34 @@
-package id.practice.mynews.presentation.main
+package id.practice.mynews.extra.presenter
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
-import com.google.android.play.core.splitinstall.SplitInstallRequest
-import id.practice.mynews.R
 import id.practice.mynews.core.data.Resource
 import id.practice.mynews.core.ui.ArticleAdapter
-import id.practice.mynews.databinding.ActivityMainBinding
+import id.practice.mynews.extra.R
+import id.practice.mynews.extra.databinding.ActivityExtraBinding
+import id.practice.mynews.extra.di.extraModule
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
 
-class MainActivity : AppCompatActivity() {
-    private val viewModel: MainViewModel by viewModel()
-    private lateinit var binding: ActivityMainBinding
+class ExtraActivity : AppCompatActivity() {
+    private val viewModel: ExtraViewModel by viewModel()
+    private lateinit var binding: ActivityExtraBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityExtraBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        loadKoinModules(extraModule)
 
         val articleAdapter = ArticleAdapter()
         articleAdapter.onItemClick = {
@@ -84,7 +86,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_option_menu, menu)
+        menuInflater.inflate(R.menu.favorite_option_menu, menu)
 
         return super.onCreateOptionsMenu(menu)
     }
@@ -94,13 +96,6 @@ class MainActivity : AppCompatActivity() {
             R.id.localization_btn -> {
                 val mIntent = Intent(Settings.ACTION_LOCALE_SETTINGS)
                 startActivity(mIntent)
-            }
-            R.id.favorite_btn -> {
-            try {
-                installExtraModule()
-            } catch (e: Exception){
-                Toast.makeText(this, "Module not found", Toast.LENGTH_SHORT).show()
-            }
             }
         }
 
@@ -116,29 +111,5 @@ class MainActivity : AppCompatActivity() {
         binding.componentError.errorTitle.text = title
         binding.componentError.errorMessage.text = message
         binding.componentError.btnRetry.setOnClickListener { }
-    }
-
-    private fun installExtraModule() {
-        val splitInstallManager = SplitInstallManagerFactory.create(this)
-        val moduleExtra = "extra"
-        if (splitInstallManager.installedModules.contains(moduleExtra)) {
-            moveToExtraActivity()
-        } else {
-            val request = SplitInstallRequest.newBuilder()
-                .addModule(moduleExtra)
-                .build()
-            splitInstallManager.startInstall(request)
-                .addOnSuccessListener {
-                    Toast.makeText(this, "Success installing module", Toast.LENGTH_SHORT).show()
-                    moveToExtraActivity()
-                }
-                .addOnFailureListener {
-                    Toast.makeText(this, "Error installing module", Toast.LENGTH_SHORT).show()
-                }
-        }
-    }
-
-    private fun moveToExtraActivity() {
-        startActivity(Intent(this, Class.forName("id.practice.mynews.extra.ExtraActivity")))
     }
 }

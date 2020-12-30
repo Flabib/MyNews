@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/favorite_btn"
+        android:title="@string/favorite"
+        android:icon="@drawable/ic_favorited"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/localization_btn"
+        android:title="@string/settings"
+        android:icon="@drawable/ic_settings"
+        app:showAsAction="ifRoom"/>
+</menu>

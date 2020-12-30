@@ -46,5 +46,4 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation "com.google.android.play:core:$play_core_version"
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 }

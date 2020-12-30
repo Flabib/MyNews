@@ -14,7 +14,7 @@
     </dist:module>
 
     <application>
-        <activity android:name=".ExtraActivity"></activity>
+        <activity android:name=".presenter.ExtraActivity"></activity>
     </application>
 
 </manifest>
