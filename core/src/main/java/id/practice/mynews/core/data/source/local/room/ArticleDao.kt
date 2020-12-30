@@ -9,12 +9,15 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ArticleDao {
-    @Query("SELECT * FROM articles")
-    fun getArticles(): Flow<List<ArticleEntity>>
+    @Query("SELECT * FROM articles WHERE title LIKE '%' || :query || '%' ORDER BY article_id ASC")
+    fun getArticles(query: String = ""): Flow<List<ArticleEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertArticles(articles: List<ArticleEntity>)
 
     @Query("DELETE FROM articles")
     suspend fun clearAll()
+
+    @Query("SELECT * FROM articles WHERE is_favorite = 1 ORDER BY article_id ASC")
+    fun getFavorites(): Flow<List<ArticleEntity>>
 }

@@ -37,7 +37,8 @@ object DataMapper {
                     it.sourceName,
                     it.title,
                     it.url,
-                    it.urlToImage
+                    it.urlToImage,
+                    it.isFavorite
                 )
             }
 
@@ -50,6 +51,7 @@ object DataMapper {
         input.sourceName,
         input.title,
         input.url,
-        input.urlToImage
+        input.urlToImage,
+        input.isFavorite
     )
 }
