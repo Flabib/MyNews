@@ -6,4 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ArticleUseCase {
     fun getArticles(): Flow<Resource<List<Article>>>
+    fun getArticleByID(id: Int): Flow<Article>
+    fun getFavorites(): Flow<List<Article>>
+    fun setFavorite(id: Int, state: Boolean)
 }

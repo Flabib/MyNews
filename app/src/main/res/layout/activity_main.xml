@@ -52,4 +52,5 @@
     <include
         android:id="@+id/component_error"
         layout="@layout/component_error"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -16,6 +16,7 @@ import id.practice.mynews.R
 import id.practice.mynews.core.data.Resource
 import id.practice.mynews.core.ui.ArticleAdapter
 import id.practice.mynews.databinding.ActivityMainBinding
+import id.practice.mynews.presentation.detail.DetailActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -30,7 +31,10 @@ class MainActivity : AppCompatActivity() {
 
         val articleAdapter = ArticleAdapter()
         articleAdapter.onItemClick = {
-            Toast.makeText(this, it.title, Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra(DetailActivity.EXTRA_ITEM, it)
+
+            startActivity(intent)
         }
 
         binding.swipeRefreshLayout.setOnRefreshListener {
@@ -57,7 +61,8 @@ class MainActivity : AppCompatActivity() {
                         binding.topHeadlines.visibility = View.VISIBLE
 
                         if (it.data == null) {
-                            showErrorMessage(R.drawable.oops, "Oops..",
+                            showErrorMessage(
+                                R.drawable.oops, "Oops..",
                                 """
                                 Network failure, Please Try Again!
                                 
@@ -96,11 +101,11 @@ class MainActivity : AppCompatActivity() {
                 startActivity(mIntent)
             }
             R.id.favorite_btn -> {
-            try {
-                installExtraModule()
-            } catch (e: Exception){
-                Toast.makeText(this, "Module not found", Toast.LENGTH_SHORT).show()
-            }
+                try {
+                    installExtraModule()
+                } catch (e: Exception) {
+                    Toast.makeText(this, "Module not found", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -139,6 +144,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun moveToExtraActivity() {
-        startActivity(Intent(this, Class.forName("id.practice.mynews.extra.ExtraActivity")))
+        startActivity(
+            Intent(
+                this,
+                Class.forName("id.practice.mynews.extra.presenter.ExtraActivity")
+            )
+        )
     }
 }

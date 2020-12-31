@@ -21,12 +21,12 @@ class ArticleRepository(
         object : NetworkBoundResource<List<Article>, List<ArticleResponse>>() {
             override fun loadFromDB(): Flow<List<Article>> {
                 return localDataSource.getArticles().map {
-                    DataMapper.mapEntitiesToDomain(it)
+                    DataMapper.mapEntitiesToDomains(it)
                 }
             }
 
-            override fun shouldFetch(data: List<Article>?): Boolean = true
-//                data == null || data.isEmpty()
+            override fun shouldFetch(data: List<Article>?): Boolean =
+                data == null || data.isEmpty()
 
             override suspend fun createCall(): Flow<ApiResponse<List<ArticleResponse>>> =
                 remoteDataSource.getArticles()
@@ -38,4 +38,20 @@ class ArticleRepository(
                 localDataSource.insertArticles(articleList)
             }
         }.asFlow()
+
+    override fun getArticleByID(id: Int): Flow<Article> {
+        return localDataSource.getArticleByID(id).map {
+            DataMapper.mapEntityToDomain(it)
+        }
+    }
+
+    override fun getFavorites(): Flow<List<Article>> {
+        return localDataSource.getFavorites().map {
+            DataMapper.mapEntitiesToDomains(it)
+        }
+    }
+
+    override fun setFavorite(id: Int, newState: Boolean) {
+        appExecutors.diskIO().execute { localDataSource.setFavorite(id, newState) }
+    }
 }

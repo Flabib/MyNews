@@ -51,12 +51,19 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ListViewHolder>() {
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemArticleRowBinding.bind(itemView)
         fun bind(data: Article) {
+
             with(binding) {
+                title.text = data.title
+                time.text = data.publishedAt?.let { Tools.dateToTimeFormat(it) }
+                author.text = data.author
+
                 val requestOptions = RequestOptions()
                 requestOptions.placeholder(Tools.randomDrawableColor)
                 requestOptions.error(Tools.randomDrawableColor)
                 requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL)
                 requestOptions.centerCrop()
+
+                data.urlToImage = data.urlToImage ?: ""
 
                 Glide.with(itemView.context)
                     .load(data.urlToImage)
@@ -85,10 +92,6 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ListViewHolder>() {
                     })
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(img)
-
-                title.text = data.title
-                time.text = data.publishedAt?.let { Tools.dateToTimeFormat(it) }
-                author.text = data.author
             }
         }
 

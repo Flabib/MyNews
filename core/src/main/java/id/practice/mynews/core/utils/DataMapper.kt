@@ -26,7 +26,7 @@ object DataMapper {
     }
 
     @JvmName("mapEntitiesToDomainArticle")
-    fun mapEntitiesToDomain(input: List<ArticleEntity>): List<Article> =
+    fun mapEntitiesToDomains(input: List<ArticleEntity>): List<Article> =
             input.map {
                 Article(
                     it.articleId,
@@ -43,6 +43,19 @@ object DataMapper {
             }
 
     fun mapDomainToEntity(input: Article) = ArticleEntity(
+        input.articleId,
+        input.author,
+        input.content,
+        input.description,
+        input.publishedAt,
+        input.sourceName,
+        input.title,
+        input.url,
+        input.urlToImage,
+        input.isFavorite
+    )
+
+    fun mapEntityToDomain(input: ArticleEntity) = Article(
         input.articleId,
         input.author,
         input.content,

@@ -8,4 +8,10 @@
     <string name="retry">Retry</string>
     <string name="favorite">Favorite</string>
     <string name="settings">Settings</string>
+    <string name="read_more">Read more</string>
+    <string name="cd_date">Date</string>
+    <string name="cd_image">Image</string>
+    <string name="cd_splash">Splash</string>
+    <string name="cd_error">Error</string>
+    <string name="time_text">%1$s • %2$s • %3$s</string>
 </resources>

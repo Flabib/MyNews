@@ -13,29 +13,29 @@ data class ArticleEntity (
     var articleId: Int = 0,
 
     @ColumnInfo(name = "author")
-    val author: String? = "",
+    var author: String? = "",
 
     @ColumnInfo(name = "content")
-    val content: String? = "",
+    var content: String? = "",
 
     @ColumnInfo(name = "description")
-    val description: String? = "",
+    var description: String? = "",
 
     @ColumnInfo(name = "published_at")
-    val publishedAt: String? = "",
+    var publishedAt: String? = "",
 
     @ColumnInfo(name = "source_name")
-    val sourceName: String? = "",
+    var sourceName: String? = "",
 
     @ColumnInfo(name = "title")
-    val title: String? = "",
+    var title: String? = "",
 
     @ColumnInfo(name = "url")
-    val url: String? = "",
+    var url: String? = "",
 
     @ColumnInfo(name = "url_to_image")
-    val urlToImage: String? = "",
+    var urlToImage: String? = "",
 
     @ColumnInfo(name = "is_favorite")
-    val isFavorite: Boolean? = false,
+    var isFavorite: Boolean? = false,
 )

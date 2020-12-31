@@ -50,6 +50,7 @@
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <include
-        android:id="@+id/component_error"
-        layout="@layout/component_error"/>
+        android:id="@+id/extra_component_error"
+        layout="@layout/extra_component_error"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

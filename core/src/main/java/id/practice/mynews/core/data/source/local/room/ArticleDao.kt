@@ -12,8 +12,14 @@ interface ArticleDao {
     @Query("SELECT * FROM articles WHERE title LIKE '%' || :query || '%' ORDER BY article_id ASC")
     fun getArticles(query: String = ""): Flow<List<ArticleEntity>>
 
+    @Query("SELECT * FROM articles WHERE article_id = :id ORDER BY article_id ASC")
+    fun getArticleByID(id: Int): Flow<ArticleEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertArticles(articles: List<ArticleEntity>)
+
+    @Query("UPDATE articles SET is_favorite = :newState WHERE article_id = :id")
+    fun setFavorite(id: Int, newState: Boolean)
 
     @Query("DELETE FROM articles")
     suspend fun clearAll()

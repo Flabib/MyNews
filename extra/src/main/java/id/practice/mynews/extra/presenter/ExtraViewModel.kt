@@ -5,5 +5,5 @@ import androidx.lifecycle.asLiveData
 import id.practice.mynews.core.domain.usecase.ArticleUseCase
 
 class ExtraViewModel(articleUseCase: ArticleUseCase) : ViewModel() {
-    val articles = articleUseCase.getArticles().asLiveData()
+    val favorites = articleUseCase.getFavorites().asLiveData()
 }
