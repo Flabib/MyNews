@@ -25,8 +25,8 @@ class ArticleRepository(
                 }
             }
 
-            override fun shouldFetch(data: List<Article>?): Boolean =
-                data == null || data.isEmpty()
+            override fun shouldFetch(data: List<Article>?): Boolean = true
+//                data == null || data.isEmpty()
 
             override suspend fun createCall(): Flow<ApiResponse<List<ArticleResponse>>> =
                 remoteDataSource.getArticles()

@@ -14,4 +14,8 @@
     <string name="cd_splash">Splash</string>
     <string name="cd_error">Kesalahan</string>
     <string name="time_text">%1$s • %2$s • %3$s</string>
+    <string name="template_empty_title">Tidak Ada Hasil</string>
+    <string name="template_empty_message">Silahkan Coba Lagi!\n\n%1$s</string>
+    <string name="template_oops_title">Ups..</string>
+    <string name="template_oops_message">Kesalahan Jaringan, Silahkan Coba Lagi!\n\n%1$s</string>
 </resources>

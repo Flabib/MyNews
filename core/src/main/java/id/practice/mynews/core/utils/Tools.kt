@@ -3,6 +3,8 @@ package id.practice.mynews.core.utils
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import org.ocpsoft.prettytime.PrettyTime
+import java.net.URI
+import java.net.URISyntaxException
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -46,7 +48,9 @@ class Tools {
             val newDate: String
             val dateFormat = SimpleDateFormat("E, d MMM yyyy", Locale(country))
             newDate = try {
-                val date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale(country)).parse(oldStringDate)
+                val date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale(country)).parse(
+                    oldStringDate
+                )
                 dateFormat.format(date)
             } catch (e: ParseException) {
                 e.printStackTrace()
@@ -55,18 +59,18 @@ class Tools {
             return newDate
         }
 
-        val country: String
+        private val country: String
             get() {
                 val locale = Locale.getDefault()
                 val country = locale.country.toString()
                 return country.toLowerCase(Locale.ROOT)
             }
 
-        val language: String
-            get() {
-                val locale = Locale.getDefault()
-                val country = locale.language.toString()
-                return country.toLowerCase(Locale.ROOT)
-            }
+        @Throws(URISyntaxException::class)
+        fun getDomainName(url: String?): String {
+            val uri = URI(url)
+            val domain: String = uri.host
+            return if (domain.startsWith("www.")) domain.substring(4) else domain
+        }
     }
 }
