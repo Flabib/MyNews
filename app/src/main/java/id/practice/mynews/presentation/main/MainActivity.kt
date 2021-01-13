@@ -19,6 +19,7 @@ import id.practice.mynews.databinding.ActivityMainBinding
 import id.practice.mynews.presentation.detail.DetailActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
+// TODO: Move sting to xml
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
