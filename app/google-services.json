@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "617489472235",
+    "project_id": "mynews-apk",
+    "storage_bucket": "mynews-apk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617489472235:android:abb571b12c640e79a5fcae",
+        "android_client_info": {
+          "package_name": "id.practice.mynews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "617489472235-12nmjk8iehp3sl74quf6u7a2kt5nbm8t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBh6ZLfATTz3_QNBOEPllPmnT_UIZ6oXB8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "617489472235-12nmjk8iehp3sl74quf6u7a2kt5nbm8t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cd_image">Image</string>
+    <string name="cd_bottom_shadow">Bottom Shadow</string>
+    <string name="cd_time">Time</string>
+</resources>

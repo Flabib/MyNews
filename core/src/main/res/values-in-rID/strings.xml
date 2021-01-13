@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cd_image">Gambar</string>
+    <string name="cd_bottom_shadow">Bayangan Bawah</string>
+    <string name="cd_time">Waktu</string>
+</resources>

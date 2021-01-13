@@ -26,14 +26,16 @@
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
                 android:transitionName="img"
-                tools:ignore="UnusedAttribute" />
+                tools:ignore="UnusedAttribute"
+                android:contentDescription="@string/cd_image" />
 
             <ImageView
                 android:id="@+id/shadow_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_alignBottom="@id/img"
-                android:src="@drawable/bottom_shadow" />
+                android:src="@drawable/bottom_shadow"
+                android:contentDescription="@string/cd_bottom_shadow" />
 
             <ProgressBar
                 android:id="@+id/progress_load_photo"
@@ -63,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/img"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_marginTop="-50dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/round_white"
@@ -75,7 +77,8 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="5dp"
-                    android:src="@drawable/ic_time" />
+                    android:src="@drawable/ic_time"
+                    android:contentDescription="@string/cd_time" />
 
                 <TextView
                     android:id="@+id/time"
