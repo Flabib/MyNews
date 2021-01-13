@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:tools="http://schemas.android.com/tools"
     package="id.practice.mynews.extra">
 
     <dist:module
         dist:instant="false"
-        dist:title="@string/title_extra">
+        dist:title="@string/title_extra"
+        tools:ignore="ManifestResource">
         <dist:delivery>
             <dist:on-demand />
         </dist:delivery>
@@ -14,7 +16,7 @@
     </dist:module>
 
     <application>
-        <activity android:name=".presenter.ExtraActivity"></activity>
+        <activity android:name=".presenter.ExtraActivity" />
     </application>
 
 </manifest>
