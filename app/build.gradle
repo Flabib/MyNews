@@ -48,4 +48,5 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation "com.google.android.play:core:$play_core_version"
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
 }
