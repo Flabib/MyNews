@@ -7,6 +7,6 @@
 
     <item android:id="@+id/localization_btn"
         android:title="@string/settings"
-        android:icon="@drawable/ic_settings"
+        android:icon="@drawable/ic_place"
         app:showAsAction="ifRoom"/>
 </menu>
