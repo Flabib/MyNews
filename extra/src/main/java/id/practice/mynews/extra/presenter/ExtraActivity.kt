@@ -57,9 +57,10 @@ class ExtraActivity : AppCompatActivity() {
         binding.extraComponentError.root.visibility = View.GONE
 
         viewModel.favorites.observe(this, {
+            binding.swipeRefreshLayout.isRefreshing = false
+
             if (it.isNotEmpty()) {
                 articleAdapter.setData(it)
-                binding.swipeRefreshLayout.isRefreshing = false
                 binding.topHeadlines.visibility = View.VISIBLE
             } else {
                 showEmptyMessage()

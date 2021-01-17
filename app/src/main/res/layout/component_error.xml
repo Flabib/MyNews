@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:background="@color/white"
     android:id="@+id/errorLayout"
     android:visibility="gone">
 
