@@ -35,16 +35,15 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // TODO: Change layout without deprecated
+        @Suppress("DEPRECATION")
         window.setFlags(
             WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
             WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION
         )
 
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        title = ""
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        title = ""
 
         val extraItem = intent.getParcelableExtra<Article>(EXTRA_ITEM)
 
