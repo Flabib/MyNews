@@ -64,6 +64,7 @@ class ExtraActivity : AppCompatActivity() {
                 binding.topHeadlines.visibility = View.VISIBLE
             } else {
                 showEmptyMessage()
+                binding.topHeadlines.visibility = View.INVISIBLE
             }
         })
     }
