@@ -11,6 +11,9 @@ jobs:
       - restore_cache:
           key: android-orb-v1-
       - run:
+          name: Set JVM Heap
+          command: echo "org.gradle.jvmargs=-Xmx2048m -Dfile.encoding=UTF-8" >> ~/project/gradle.properties
+      - run:
           name: Set buildConfigField BASE_URL
           command: echo "BASE_URL=\"$BASE_URL\"" >> ~/project/gradle.properties
       - run:
