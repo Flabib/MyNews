@@ -68,7 +68,7 @@ dependencies {
 
     implementation "androidx.cardview:cardview:1.0.0"
 
-    implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
+    implementation 'org.ocpsoft.prettytime:prettytime:5.0.0.Final'
 
     implementation "net.zetetic:android-database-sqlcipher:4.4.0"
     implementation "androidx.sqlite:sqlite-ktx:2.1.0"
